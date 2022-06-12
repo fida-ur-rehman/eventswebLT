@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cbe183c3.chunk.css",
+    "main.js": "/static/js/main.a5784105.chunk.js",
+    "main.js.map": "/static/js/main.a5784105.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ba819763.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ba819763.js.map",
+    "static/js/2.5e376839.chunk.js": "/static/js/2.5e376839.chunk.js",
+    "static/js/2.5e376839.chunk.js.map": "/static/js/2.5e376839.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.cbe183c3.chunk.css.map": "/static/css/main.cbe183c3.chunk.css.map",
+    "static/js/2.5e376839.chunk.js.LICENSE.txt": "/static/js/2.5e376839.chunk.js.LICENSE.txt",
+    "static/media/connectedmap.5687e287.svg": "/static/media/connectedmap.5687e287.svg",
+    "static/media/icon.74c9e203.png": "/static/media/icon.74c9e203.png",
+    "static/media/profile.5faf09a7.png": "/static/media/profile.5faf09a7.png",
+    "static/media/undraw_date_picker_gorr.634060df.svg": "/static/media/undraw_date_picker_gorr.634060df.svg",
+    "static/media/undraw_events_re_98ue.efb38e7a.svg": "/static/media/undraw_events_re_98ue.efb38e7a.svg",
+    "static/media/undraw_happy_feeling_slmw.4b9b0d8c.svg": "/static/media/undraw_happy_feeling_slmw.4b9b0d8c.svg",
+    "static/media/undraw_having_fun_re_vj4h.209def2a.svg": "/static/media/undraw_having_fun_re_vj4h.209def2a.svg",
+    "static/media/undraw_street_food_re_uwex.579a88a8.svg": "/static/media/undraw_street_food_re_uwex.579a88a8.svg",
+    "static/media/undraw_under_construction_-46-pa.1d53a78c.svg": "/static/media/undraw_under_construction_-46-pa.1d53a78c.svg",
+    "static/media/undraw_world_re_768g.e7b8a7ab.svg": "/static/media/undraw_world_re_768g.e7b8a7ab.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ba819763.js",
+    "static/js/2.5e376839.chunk.js",
+    "static/css/main.cbe183c3.chunk.css",
+    "static/js/main.a5784105.chunk.js"
+  ]
+}

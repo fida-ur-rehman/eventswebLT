@@ -1,0 +1,48 @@
+@import "../../../../App.scss";
+
+.myapprovalsh{
+    padding-top: 2%;
+}
+
+.bid-parent{
+    .bid-parent-container{
+        background: linear-gradient(to bottom right, $pink,$lightPink);
+        margin-top:1%;
+        margin-bottom: 1%;
+        padding:2%;
+        border-radius: 10px;
+        .price{
+            font-weight: bolder;
+            color: $purple;
+            font-size: 1.2em;
+        }
+        .name{
+            font-weight: 500;
+            font-size: 1.5em;
+        }
+        .for{
+            color: #a1a1a1;
+        }
+        .description{
+            color: #3a3a3a;
+        }
+        .services-container{
+            margin-top: 5%;
+            color: black;
+            padding:2% 0;
+            border-radius: 10px;
+            .service-cat{
+                color: #3a3a3a;
+            }
+            .service-quantity{
+                color: #3a3a3a;
+            }
+            .service-subcat, .service-price, .index{
+
+                font-weight: 500;
+            }
+            
+
+        }
+    }
+}

@@ -1,0 +1,112 @@
+@import "../../../../App.scss";
+
+.my-services{
+    .heading{
+        margin: 2% 0;
+    }
+    h1{
+        font-size: 2.2em;
+    }
+    .cardparentcontainer{
+        .carddiv{
+            background-color: #f7f7f7;
+            margin: 2% 3%;
+            padding:2% 5%;
+            border-radius: 10px;
+            .maincategory{
+                font-weight: 300;
+                color: $purple;
+            }
+            .category{
+                color:#3f3f3f;
+            }
+            .time{
+                color:#a1a1a1;
+            }
+            .price{
+                font-weight: bolder;
+            }
+            .quantity{
+                
+            }
+
+        }
+    }
+}
+
+.add-services{
+    .heading{
+        margin-top: 1%;
+        text-align: center;
+    }
+    .addservicesform{
+        margin: 2% 25%;
+        .auto-complete-div{
+            margin: 4% 0;
+        }
+        .textfield{
+            margin:4% 0;
+        }
+        .row{
+            margin:auto 0%;
+            .textfield{
+                margin:4% 5%;
+            }
+        }
+        .additem{
+            margin:3% auto;
+        }
+    }
+    .tablediv{
+        margin:2% 3%;
+    }
+}
+
+
+
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+
+}
+@media (max-width: 576px) {
+.my-services{
+    .heading{
+        text-align: center;
+    }
+    .cardparentcontainer{
+        .carddiv{
+            margin: 4% 8%;
+            
+
+        }
+    }
+}
+.add-services{
+    .heading{
+        margin-top: 1%;
+        text-align: center;
+    }
+    .addservicesform{
+        margin: 2% 10%;
+        .auto-complete-div{
+            margin: 4% 0;
+        }
+        .textfield{
+            margin:8% 0;
+        }
+        .row{
+            margin:auto 0;
+            .textfield{
+                margin:7% 0;
+            }
+        }
+        .additem{
+            margin:5% auto;
+        }
+    }
+}
+}

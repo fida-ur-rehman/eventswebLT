@@ -1,0 +1,78 @@
+@import "../../App.scss";
+
+.signupdiv{
+    h1{
+        font-size: 3em;
+        color: $purple;
+        margin-bottom: 5%;
+        font-weight: 800;
+    }
+    form{
+    background: linear-gradient(to bottom right, $lightPink,$extraLightPink);
+    border-radius: 5px;
+    border:4px solid $pink;
+    text-align: center;
+    width: 30%;
+    margin:5% auto;
+    padding:5% 0;
+   
+    .inputdiv{
+        margin:1% 15%;
+          
+    }.addinfoinputdiv{
+        margin:5% 15%;
+    }
+    .authpara{
+        font-size: 1.2em;
+        margin: 6% 0;
+    }
+    .authpara2{
+        margin-top: 5%;
+    }
+    .btn-purple{
+        padding:2% 5%;
+        margin:5% 0;
+    }
+    }
+    .start{
+        margin-top: 5%;
+    }
+}
+
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+
+}
+@media (max-width: 576px) {
+    .signupdiv{
+        h1{
+            font-size: 2.5em;
+            padding-bottom: 8%;
+        }
+        form{
+        //background: linear-gradient(to bottom right, $lightPink,$extraLightPink);
+        text-align: center;
+        width: 80%;
+        margin:30% auto;
+        padding:5% 0;
+       
+        .inputdiv{
+            margin:1% 15%;
+           
+           
+           
+           
+        }
+        .btn-purple{
+            padding:3% 10%;
+            margin:15% 0;
+        }
+        }
+        
+    }
+
+}

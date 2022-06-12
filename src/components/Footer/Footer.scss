@@ -1,0 +1,62 @@
+@import "../../App.scss";
+
+.fullfooter{
+    margin-top: 10%;
+    height: 35vh;
+    width: 100vw;
+    border-top: 10px solid #5a1e96c4;
+    background: linear-gradient(to bottom right, $pink, $extraLightPink);
+    padding:1%;
+    .link{
+        color: rgb(71, 71, 71);
+        text-decoration: underline;
+    }
+    .footercol{
+        .row{
+            margin-top: 4%;
+        }
+    }
+}
+
+.halffooter{
+    margin-top: 10%;
+    height: 35vh;
+    width: 83vw;
+    border-top: 10px solid #5a1e96c4;
+    background: linear-gradient(to bottom right, $pink, $extraLightPink);
+    padding:1%;
+    .link{
+        color: rgb(71, 71, 71);
+        text-decoration: underline;
+    }
+    .footercol{
+        .row{
+            margin-top: 4%;
+        }
+    }
+}
+
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+
+}
+@media (max-width: 576px) {
+.footer{
+    height: 60vh;
+    text-align: center;
+    .footercol{
+        .row{
+            justify-content: center;
+            .footercol{
+                
+            }
+        }
+    }
+}
+}
+
+

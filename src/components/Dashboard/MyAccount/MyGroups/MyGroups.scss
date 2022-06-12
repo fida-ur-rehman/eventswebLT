@@ -1,0 +1,39 @@
+@import "../../../../App.scss";
+
+
+.group-container{
+    background: linear-gradient(to bottom right, $extraLightPink, $lightPink, $pink);
+    h2{
+        color: $purple;
+    }
+    border-radius: 10px;
+    padding:2% 3%;
+    .count-number{
+        font-weight: bolder;
+    }
+    p{
+        font-weight: 400;
+    }
+}
+.group-container:hover{
+    cursor: pointer;
+    transition: .2s;
+    transform: scale(1.1);
+    background: $pink;
+}
+
+.groupcreation{
+    h1{
+        text-align: center;
+    }
+    .cont1{
+        background-color: white;
+    }
+    .cont2{
+        background-color: white;
+    }
+}
+
+.groupform{
+    margin:2% 10%;
+}

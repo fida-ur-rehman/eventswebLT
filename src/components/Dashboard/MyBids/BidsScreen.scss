@@ -1,0 +1,90 @@
+@import "../../../App.scss";
+
+.container{
+    
+
+}
+
+.bid-container{
+    margin:2% 0;
+    padding:2% 4%;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+
+    .name{
+        font-weight: 400;
+    }
+    .price{
+        font-size: 2em;
+        color: rgb(0, 145, 36);
+        font-weight: bolder;
+    }
+    .org{
+        color: rgb(155, 155, 155);
+    }
+    .description{
+        margin-right: 10%;
+        font-weight: 400;
+        color: rgb(97, 97, 97);
+    }
+    .services-container{
+        padding:1% 5%;
+        margin:3% 1%;
+        .firstrow{
+            .index{
+                padding-right: 3%;
+                h3{
+                    font-weight: 600;
+                }
+            }
+            .maincategory{
+                h3{
+                    font-weight: 600;
+                }
+            }
+        }
+        .last-container{
+            margin:1% 3%;
+            .subcategory{
+                font-weight: 400;
+            }
+            .secondrow{
+                margin:0 .1%;
+                .s-quantity{
+                    font-weight: 400;
+                }
+                .s-price{
+                    font-weight: 600;
+                }
+            }
+        }
+        
+    }
+}
+
+.grey{
+    background-color: #f7f7f7;
+
+}
+
+.create-bid{
+    .create-bid-heading{
+        font-size: 2.5em;
+        margin: 1.5% 0;
+    }
+    .heading{
+        margin-top: 0;
+    }
+    .event-info{
+        padding:4%;
+        background-color: white;
+        border-radius: 10px;
+    }
+    .form-section{
+        border-radius: 10px;
+        padding:4%;
+        height: 100vh;
+        background-color: white;
+        overflow-y: scroll;
+    }
+}

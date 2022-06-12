@@ -1,0 +1,40 @@
+@import "../../../App.scss";
+
+.feedbackform-container{
+    height: 100vh;
+    h1{
+        margin: 2% 0;
+        font-size: 2em;
+    }
+    h2{
+        text-align: center;
+        font-weight: 300;
+    }
+    .addform{
+        background-color: white;
+        border-radius: 10px; 
+        padding:2%;  
+    }
+    .feedbackform{
+        background-color: white;
+        height: 80vh;
+        overflow-y: scroll;
+        padding:2%;  
+        border-radius: 10px; 
+    }
+    .display-responses{
+        background-color: white;
+        margin: 3% 5%;
+        padding:2%;
+        height: 80vh;
+        overflow-y: scroll;
+        border-radius: 10px; 
+        .index{
+            font-weight: bold;
+        }
+        .resp{
+            font-weight: 300;
+        }
+    }
+
+}

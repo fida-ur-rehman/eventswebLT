@@ -1,0 +1,120 @@
+@import "../../../App.scss";
+
+
+.createEventDiv{
+    h1{
+        font-size: 3em;
+    }
+    .autocomplete-container{
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        margin: 1% 0;
+        padding: 0 10%;
+        input{
+            width: 100%;
+            padding: 1%;
+            border-radius: 30px;
+            border: 2px solid #f7f7f7;
+            outline: none;
+        }
+        .suggestion-item{
+            margin: 0 1%;
+            padding: 1%;
+        }
+        .suggestion-item--active{
+            margin: 0 1%;
+            padding: 1%;
+
+        }
+    }
+}
+
+.createEventDiv2{
+    background-color: white;
+    margin: auto 20%;
+    text-align: center;
+    border-radius: 10px;
+    h1{
+        padding-top: 5%;
+    }
+    .input{
+        display: block;
+        margin:4% 0;
+    }
+    .inputdiv{    
+        margin:0 20%;
+    }
+    .check-group{
+       justify-content: center;
+        margin:0 20%;
+    }
+    .datetimepicker{
+        margin:5% 0;
+    }
+    .submitbutton{
+        margin: 2% 0 5% 0;
+        
+    }
+    .heading1{
+        margin-top: 3%;
+    }
+    .privatediv{
+        margin:5% 0 8% 0;
+    }
+    .autocomplete{
+        margin:3% 30%;
+    }
+    .mobilenumber{
+        width: 40%;
+    }
+    .numberchip{
+        margin:.5%;
+    }
+    .addbutton{
+        display: block;
+        margin: 3% auto;
+    }
+}
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+
+}
+@media (max-width: 576px) {
+  .createEventDiv{
+      h1{
+          font-size: 2em;
+          text-align: center;
+      }
+  }
+  .createEventDiv2{
+      .datetimepicker{
+          margin:10% 0;
+      }
+      .service-tagh1{
+          margin-top: 10%;
+      }
+      .privatediv{
+        margin:8% 0 10% 0;
+    }
+    .autocomplete{
+        margin:8% 25%;
+
+    }
+    .mobilenumber{
+        width: 50%;
+    }
+    .numberchip{
+        margin:.5%;
+    }
+    .addbutton{
+        display: block;
+        margin: 7% auto;
+    }
+  }
+  
+}
