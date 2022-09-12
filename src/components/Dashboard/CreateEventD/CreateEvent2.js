@@ -58,6 +58,11 @@ function CreateEvent2(props) {
     const [tagTotal,setTagTotal]=React.useState(0)
     const [error,setError]=React.useState("")
     const [currency,setCurrency]=React.useState({})
+    const [newService,setNewService]=React.useState({name:"",quantity:"",price:""})
+    const [newServices,setNewServices]=React.useState([])
+    const [totalBudget,setTotalBudget]=React.useState(0)
+    const [allowService,setAllowService] = React.useState(true)
+    console.log("allow serv",allowService)
 
 
     const getCurr = async ()=>{
@@ -386,13 +391,43 @@ function CreateEvent2(props) {
         <TextField value={address} onChange={(e)=>setAddress(e.target.value)} fullWidth className="input" id="standard-basic" label="Address" variant="standard"  />
         </div>
 
-        <FormControlLabel 
+
+        <h1>Add Services</h1>
+        <div className="inputdiv">
+            <FormControlLabel value={allowService} onChange={()=>setAllowService(!allowService)} control={<Checkbox defaultChecked />} label="Do You want services for your event" />
+
+          {allowService&&<>
+          <TextField onChange={(e)=>setNewService({...newService,name:e.target.value})} fullWidth className="input" variant="filled" id="filled-basic" label="Service Name" />
+          <TextField onChange={(e)=>setNewService({...newService,quantity:e.target.value})} fullWidth className="input" variant="filled" id="filled-basic" label="Service Quantity" />
+          <TextField onChange={(e)=>setNewService({...newService,price:e.target.value})} fullWidth className="input" variant="filled" id="filled-basic" label="Service Price" />
+          <div>
+          <Button onClick={()=>{
+            if(newService.name.length>0 && newService.quantity.length>0 && newService.price.length>0){
+              if(!newServices.filter(i=>i.name===newService.name).length>0){
+                setTotalBudget(totalBudget+parseInt(newService.price))
+                setNewServices([...newServices,newService])
+              }
+            }
+            
+          }}>Click to Add Service</Button>
+          </div>
+          {
+            newServices.map((item,index)=><Chip key={index} className="m-3" label={`${item.quantity} ${item.name} - ${item.price}`} onDelete={()=>setNewServices(newServices.filter(i=>i.name!==item.name))} />)
+          }
+          <TextField onChange={(e)=>setTotalBudget(e.target.value)} value={totalBudget} fullWidth className="input" variant="filled" id="filled-basic" label="Total Budget of the Event" />
+          <FormControlLabel 
+        value={allowContact}
+        control={<Checkbox value={allowContact} defaultChecked onChange={()=>setAllowContact(!allowContact)} />}
+        label="Display approximation on vendor side"
+        />
+        </>}
+          <FormControlLabel 
         value={allowContact}
         control={<Checkbox value={allowContact} defaultChecked onChange={()=>setAllowContact(!allowContact)} />}
         label="Allow vendors and users to contact you"
         />
-        
-        <h1 className="service-tagh1">Service Tags</h1>
+          </div>
+        {/* <h1 className="service-tagh1">Service Tags</h1>
         <p style={{color:"#ccc"}}><i>service tags will help vendor put appropriate bid</i></p>
         <FormGroup 
         className="check-group"
@@ -435,8 +470,9 @@ function CreateEvent2(props) {
          <p style={{fontWeight:"bold",fontSize:"1.2em"}}>Approximate cost : {Math.floor(tagTotal)} {props.user.userInfo.curr}</p>
          <p style={{color:"#ccc"}}><i>Note : approximate cost is on an average cost you'll require for your event if you have selected specific tags, this is not an actual cost, cost may vary from place to place</i></p>
          </div>
-         :null}
+         :null} */}
 
+          <div>
             <Button 
             className="submitbutton"
             type="submit"
@@ -444,6 +480,8 @@ function CreateEvent2(props) {
             variant="contained">
             Create Event
             </Button>
+            </div>
+
             {/* end of block */}
             </form>
         </div>
