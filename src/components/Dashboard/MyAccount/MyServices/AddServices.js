@@ -29,6 +29,7 @@ function AddServices(props) {
     const [open, setOpen] = React.useState(false);
     const [unit, setUnit] = React.useState('');
     const SiUnits = ['ml','L','kg','lbs','g','cm','m','inch',"pcs", 'boxes']
+    console.log("new conseole",mainCategoryR,unit)
     const handleChange = (event) => {
       setUnit(event.target.value);
     };
@@ -54,10 +55,8 @@ function AddServices(props) {
             setError("Please fill all details")
         }else{
             setError("")
-            let arr = mainCategory.filter(item=>item.name===mainCategoryR)
-            if(arr.length>0){
-                categoryId=arr[0]._id
-                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory, quantity:data.quantity, price:data.price,unit},{headers:{token:props.EventUser.user}})
+            console.log({categoryId, category:mainCategoryR, subCategory:data.subcategory,description:data.subcategoryDescription, quantity:data.quantity, price:data.price,unit})
+                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory,description:data.subcategoryDescription, quantity:data.quantity, price:data.price,unit},{headers:{token:props.EventUser.user}})
                 .then(res=>{
                     console.log(res);
                     if(res.data.msg==="Success"){
@@ -71,9 +70,27 @@ function AddServices(props) {
                     setLoading(false)
                     console.log(err)
                 })
-            }else{
-              setError("Category dosen't exists, please select from dropdown")
-            }
+            // let arr = mainCategory.filter(item=>item.name===mainCategoryR)
+            // if(arr.length>0){
+            //     categoryId=arr[0]._id
+            //     console.log({categoryId, category:mainCategoryR, subCategory:data.subcategory,description:data.subcategoryDescription, quantity:data.quantity, price:data.price,unit})
+            //     // axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/service/create-service` ,{categoryId, category:mainCategoryR, subCategory:data.subcategory, quantity:data.quantity, price:data.price,unit},{headers:{token:props.EventUser.user}})
+            //     // .then(res=>{
+            //     //     console.log(res);
+            //     //     if(res.data.msg==="Success"){
+            //     //         setOpen(true)
+            //     //         setLoading(false)
+            //     //         setDataList([...dataList,res.data.result])
+            //     //     }
+                    
+            //     // })
+            //     // .catch(err=>{
+            //     //     setLoading(false)
+            //     //     console.log(err)
+            //     // })
+            // }else{
+            //   setError("Category dosen't exists, please select from dropdown")
+            // }
             
         }
     }
@@ -127,7 +144,52 @@ function AddServices(props) {
       {...register('subcategory',{required:true})}
       className="textfield" fullWidth label="Sub Category" variant="outlined" />
 
-      <div className="row justify-content-center align-items-center">
+      <TextField
+      error={errors.subcategoryDescription?true:false}
+      helperText={errors.subcategoryDescription?"sub-category description is must":null}
+      inputProps={{ maxLength: 20 }}
+      multiline
+      rows={2}
+      {...register('subcategoryDescription',{required:true})}
+      className="textfield" fullWidth label="Sub Category Description" variant="outlined" />
+
+
+<div className="auto-complete-div">
+        {/* <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={mainCategoryR}
+          label="Age"
+          onChange={(e)=>setMainCategoryR(e)}
+        >
+          {
+            mainCategory.map((option) => <MenuItem value = {option.name}>{option.name}</MenuItem>)
+          }
+        </Select>
+      </FormControl> */}
+        <Autocomplete
+        onInputChange={(e,n)=>setUnit(n)}
+        id="free-solo-demo"
+        freeSolo
+        fullWidth
+        options={SiUnits.map((option) => option)}
+        renderInput={(params) => <TextField {...params} label="Select Unit" />}
+      />
+      </div>
+
+
+      <TextField 
+      fullWidth
+      error={errors.quantity?true:false}
+      helperText={errors.quantity?"quantity is must":null}
+      onInput = {(e) =>{
+        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+    }}
+      {...register('quantity',{required:true})}
+      className="textfield" label="Quantity" variant="outlined" />
+      {/* <div className="row justify-content-center align-items-center">
      
      <div className="col-4">
       <TextField 
@@ -140,6 +202,8 @@ function AddServices(props) {
       {...register('quantity',{required:true})}
       className="textfield" label="Quantity" variant="outlined" />
       </div>
+
+
 
 
       <div className="col-4">
@@ -161,7 +225,7 @@ function AddServices(props) {
       </div>
       
     
-      </div>
+      </div> */}
       <TextField 
       onInput = {(e) =>{
         e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)

@@ -93,7 +93,7 @@ function OrganizerBid(props) {
         })
     }
 
-    const handlePayment=()=>{
+    const handlePayment=(bidId)=>{
         const options = {
             key: 'rzp_test_BbBTgCM0XfV6iH',
             amount: '1000', //  = INR 1
@@ -101,13 +101,14 @@ function OrganizerBid(props) {
             description: 'some description',
             handler: function(response) {
                 console.log(response);
-                axios.post(`${process.env.REACT_APP_DEVELOPMENT}/razorpay`,{amount:1000})
-                .then(res=>{
-                  console.log(res);
-                })
-                .catch(err=>{
-                  console.log(err);
-                })
+                  axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/pay`,{bidId,transaction:response,paidStatus:"Paid",paidAmount:500},{headers:{token:props.user.user}})
+                  .then(res=>{
+                    console.log(res)
+                    setFlag(!flag)
+                  })
+                  .catch(err=>{
+                    console.log(err)
+                  })
             },
             prefill: {
                 name: 'Gaurav',
@@ -218,7 +219,12 @@ function OrganizerBid(props) {
                     </div>:<Alert className="mt-3" severity="error">Bid cancellation requested</Alert>}
                     
                     <div style={{textAlign:"center"}} className="my-3">
-                    <Button onClick={()=>handlePayment()} startIcon={<AttachMoneyIcon />} variant="contained">Pay Vendor</Button>
+                    {item.transaction?
+                    <div>
+                    <p><b>Paid</b></p>
+                    <p>Transaction Id: {item.transaction.razorpay_payment_id}</p>
+                    </div>
+                    :<Button onClick={()=>handlePayment(item._id)} startIcon={<AttachMoneyIcon />} variant="contained">Pay Vendor</Button>}
                     </div>
 
                     </div>

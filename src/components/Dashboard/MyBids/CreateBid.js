@@ -153,8 +153,8 @@ function CreateBid(props) {
             <h2>{props.location.state.name}</h2>
             <p>{props.location.state.description}</p>
             {
-            props.location.state.reqServices.map((item,index)=>(
-                <Chip sx={{margin:"0 1%"}} label={item} key={index} />
+            props.location.state.serviceTags.map((item,index)=>(
+                <Chip sx={{margin:"0 1%"}} label={`${item.quantity} ${item.name} - ${item.price} ${props.EventUser.userInfo.curr}`} key={index} />
             ))
             }
             </section>

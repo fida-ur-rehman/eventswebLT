@@ -84,9 +84,10 @@ function MyServices(props) {
                             setOpen(true)}}><DeleteOutlineOutlinedIcon color="error" /></IconButton>
                     </div>
                     <div className="row align-items-center justify-content-between">
-                        <p className="category">{item.subCategory}</p>
+                        <p className="category"><b>{item.subCategory}</b></p>
                         <p className="price"> {item.price} {props.EventUser.userInfo.curr}</p>
                     </div>
+                    <p className="description">- {item.description} </p>
                     <div className="row align-items-center justify-content-between">
                         <p className="time">{renderNormalDate(item.updatedAt)}</p>
                         <p className="quantity">{item.quantity} {item.unit}</p>

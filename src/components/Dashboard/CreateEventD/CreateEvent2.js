@@ -62,7 +62,8 @@ function CreateEvent2(props) {
     const [newServices,setNewServices]=React.useState([])
     const [totalBudget,setTotalBudget]=React.useState(0)
     const [allowService,setAllowService] = React.useState(true)
-    console.log("allow serv",allowService)
+    const [displayToVendor,setDisplayToVendor]=React.useState(true)
+    console.log("allow serv",allowService,newServices,displayToVendor)
 
 
     const getCurr = async ()=>{
@@ -125,8 +126,7 @@ function CreateEvent2(props) {
         //problem is with group list array so private event cannot be seen for 4th user
       setOpen(true)
       console.log(GroupList);
-        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/create-event`,
-        {mobileNo:phone, 
+      const obj = {mobileNo:phone, 
         email:email, 
         address:address, 
         name:data.eventName, 
@@ -136,11 +136,16 @@ function CreateEvent2(props) {
         location:props.location.state.eventLocation, 
         start:start, 
         end:end, 
-        reqServices:tagList,
+        serviceTags:newServices,
         eventAddress:data.eventAddress,
         maxMembers: data.maximumattendees?data.maximumattendees:false,
         allowContact,
-        },{headers:{token:props.user.user}})
+        showApproximation:displayToVendor,
+        approximatePrice:totalBudget
+        }
+      console.log(obj)
+        axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/create-event`,
+        obj,{headers:{token:props.user.user}})
         .then(result=>{
             setError("")
             setOpen(false)
@@ -416,8 +421,8 @@ function CreateEvent2(props) {
           }
           <TextField onChange={(e)=>setTotalBudget(e.target.value)} value={totalBudget} fullWidth className="input" variant="filled" id="filled-basic" label="Total Budget of the Event" />
           <FormControlLabel 
-        value={allowContact}
-        control={<Checkbox value={allowContact} defaultChecked onChange={()=>setAllowContact(!allowContact)} />}
+        value={displayToVendor}
+        control={<Checkbox value={displayToVendor} defaultChecked onChange={()=>setDisplayToVendor(!displayToVendor)} />}
         label="Display approximation on vendor side"
         />
         </>}

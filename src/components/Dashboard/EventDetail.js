@@ -179,11 +179,11 @@ function EventDetail(props) {
         <span className="status-red">{details.status}</span>
         </div>
 
-        {
-          details.reqServices.length>0&&details.reqServices.map((item,index)=>(
-            <Chip className='mt-5' label={item} key={index} icon={<LocalOfferIcon />} />
+        {/* {
+          details.serviceTags.length>0&&details.serviceTags.map((item,index)=>(
+            <Chip className='m-3' label={`${item.quantity} ${item.name}`} key={index} icon={<LocalOfferIcon />} />
           ))
-        }
+        } */}
 
         <div className="row justify-content-around timediv">
         <p><HourglassEmptyIcon /> Start : {moment.parseZone(details.start).local().format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
@@ -196,7 +196,7 @@ function EventDetail(props) {
         {details.allowContact && <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>}
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
         </div>:null}
-        <LiveStream eventOrganizerId={details.organiserId} name={details.organiserName} />
+        {/* <LiveStream eventOrganizerId={details.organiserId} name={details.organiserName} /> */}
 
         </div>
 
