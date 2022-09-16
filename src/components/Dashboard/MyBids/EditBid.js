@@ -140,7 +140,7 @@ function EditBid(props) {
         }
         else{
             setError("")
-            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price,unit}
+            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price,unit,description:data.subcategoryDescription}
             let present = dataList.filter(item=>item.subCategory===obj.subCategory)
             if(present.length>0){
                 setError("Already Added")
@@ -241,10 +241,54 @@ function EditBid(props) {
 
 
 
+                    <TextField
+                        error={errors.subcategoryDescription?true:false}
+                        helperText={errors.subcategoryDescription?"sub-category description is must":null}
+                        inputProps={{ maxLength: 20 }}
+                        multiline
+                        rows={2}
+                        {...register('subcategoryDescription',{required:true})}
+                        className="textfield" fullWidth label="Sub Category Description" variant="outlined" />
 
 
+                    <div className="auto-complete-div">
+                            {/* <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={mainCategoryR}
+                            label="Age"
+                            onChange={(e)=>setMainCategoryR(e)}
+                            >
+                            {
+                                mainCategory.map((option) => <MenuItem value = {option.name}>{option.name}</MenuItem>)
+                            }
+                            </Select>
+                        </FormControl> */}
+                            <Autocomplete
+                            onInputChange={(e,n)=>setUnit(n)}
+                            id="free-solo-demo"
+                            freeSolo
+                            fullWidth
+                            options={SiUnits.map((option) => option)}
+                            renderInput={(params) => <TextField {...params} label="Select Unit" />}
+                        />
+                        </div>
 
-                    <div className="row justify-content-center align-items-center">
+
+                        <TextField 
+                        fullWidth
+                        error={errors.quantity?true:false}
+                        helperText={errors.quantity?"quantity is must":null}
+                        onInput = {(e) =>{
+                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+                        }}
+                        {...register('quantity',{required:true})}
+                        className="textfield" label="Quantity" variant="outlined" />
+
+
+                    {/* <div className="row justify-content-center align-items-center">
      
                         <div className="col-4">
                         <TextField 
@@ -278,7 +322,7 @@ function EditBid(props) {
                         </div>
                         
                         
-                        </div>
+                        </div> */}
                         <TextField 
                         onInput = {(e) =>{
                             e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)

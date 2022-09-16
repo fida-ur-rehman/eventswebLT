@@ -63,6 +63,7 @@ function MyApprovals(props) {
                                     <div className="col-7">
                                     <p className="service-subcat">{service.subCategory}</p>
                                     <p className="service-cat">{service.category}</p>
+                                    <p className="service-cat">{service.description}</p>
                                     </div>
 
                                     <div className="col-3">

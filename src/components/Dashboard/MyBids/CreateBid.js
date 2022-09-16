@@ -83,6 +83,7 @@ function CreateBid(props) {
             if(selection.length>0){
                 finalS = selection.map(item=>services[item-1])
             }
+            console.log(finalS,dataList)
             axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/bid/create-bid`, {eventId:props.location.state._id, description, services:[...finalS,...dataList], totalPrice:getTotal(finalS)}, {headers:{token:props.EventUser.user}})
             .then(res=>{
             console.log(res);
@@ -111,7 +112,7 @@ function CreateBid(props) {
         }
         else{
             setError("")
-            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price,unit}
+            let obj = {category:mainCategoryR,subCategory:data.subcategory,quantity:data.quantity,price:data.price,unit,description:data.subcategoryDescription}
             let present = dataList.filter(item=>item.subCategory===obj.subCategory)
             if(present.length>0){
                 setError("Already Added")
@@ -127,7 +128,7 @@ function CreateBid(props) {
         setDataList(array)
         //setFinalServices(array)
     }
-    console.log(dataList)
+    console.log("data list of services",dataList)
     return (
         <div className="row">
         <SimpleSnackbar open={open} setOpen={setOpen} message="Item added to my services" />
@@ -212,10 +213,54 @@ function CreateBid(props) {
 
 
 
+                    <TextField
+                        error={errors.subcategoryDescription?true:false}
+                        helperText={errors.subcategoryDescription?"sub-category description is must":null}
+                        inputProps={{ maxLength: 20 }}
+                        multiline
+                        rows={2}
+                        {...register('subcategoryDescription',{required:true})}
+                        className="textfield" fullWidth label="Sub Category Description" variant="outlined" />
 
 
+                    <div className="auto-complete-div">
+                            {/* <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                            <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={mainCategoryR}
+                            label="Age"
+                            onChange={(e)=>setMainCategoryR(e)}
+                            >
+                            {
+                                mainCategory.map((option) => <MenuItem value = {option.name}>{option.name}</MenuItem>)
+                            }
+                            </Select>
+                        </FormControl> */}
+                            <Autocomplete
+                            onInputChange={(e,n)=>setUnit(n)}
+                            id="free-solo-demo"
+                            freeSolo
+                            fullWidth
+                            options={SiUnits.map((option) => option)}
+                            renderInput={(params) => <TextField {...params} label="Select Unit" />}
+                        />
+                        </div>
 
-                    <div className="row justify-content-center align-items-center">
+
+                        <TextField 
+                        fullWidth
+                        error={errors.quantity?true:false}
+                        helperText={errors.quantity?"quantity is must":null}
+                        onInput = {(e) =>{
+                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+                        }}
+                        {...register('quantity',{required:true})}
+                        className="textfield" label="Quantity" variant="outlined" />
+
+
+                    {/* <div className="row justify-content-center align-items-center">
      
                         <div className="col-4">
                         <TextField 
@@ -249,7 +294,7 @@ function CreateBid(props) {
                         </div>
                         
                         
-                        </div>
+                        </div> */}
                         <TextField 
                         onInput = {(e) =>{
                             e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
@@ -281,15 +326,17 @@ function CreateBid(props) {
                 <thead>
                     <tr><th>Category</th>
                     <th>Sub Category</th>
+                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th></th>
                 </tr></thead>
                 <tbody>
                                     {dataList.map((item,index)=>(
-                                        <tr>
+                                        <tr key={index}>
                                         <td data-label="Name">{item.category}</td>
                                         <td data-label="Age">{item.subCategory}</td>
+                                        <td data-label="Age">{item.description}</td>
                                         <td data-label="Job">{item.quantity} {item.unit}</td>
                                         <td data-label="Job">{item.price} {props.EventUser.userInfo.curr}</td>
                                         <td data-label="delete">
