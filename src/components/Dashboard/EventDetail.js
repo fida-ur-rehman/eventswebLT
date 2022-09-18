@@ -196,7 +196,7 @@ function EventDetail(props) {
         {details.allowContact && <Button onClick={()=>createConv()} variant="text" className="detailbutton" startIcon={<ChatBubbleOutlineOutlinedIcon />}>Chat</Button>}
         <Button onClick={()=>props.history.push("/createbid",details)} variant="contained" className="detailbutton" endIcon={<GavelOutlinedIcon />}>Bid</Button>
         </div>:null}
-        {/* <LiveStream eventOrganizerId={details.organiserId} name={details.organiserName} /> */}
+        <LiveStream eventOrganizerId={details.organiserId} name={details.organiserName} />
 
         </div>
 

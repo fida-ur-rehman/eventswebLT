@@ -6,7 +6,8 @@ import {Button} from '@mui/material'
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import "./EventDetail.scss"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-var val = Math.floor(1000 + Math.random() * 9000);
+import axios from 'axios'
+//var val = Math.floor(1000 + Math.random() * 9000);
 let rtc = {
     // For the local audio and video tracks.
     localAudioTrack: null,
@@ -14,26 +15,40 @@ let rtc = {
     client: null,
 };
 
-    let options = {
-        // Pass your app ID here.
-        appId: "f5808036f38f4f46897775f9567caac5",
-        // Set the channel name.
-        channel: "testchannel",
-        // Use a temp token
-        token: "006f5808036f38f4f46897775f9567caac5IACRwndO+JKa0o58XKTrO3rKCzvl9WF0Nek073KwZRMrZOpuE8wAAAAAEACucvvFMkKHYgEAAQAzQodi",
-        // Uid
-        uid:val,
-    };
 
-let container = <div className="live-stream-div">
-<h1>leive </h1>
-</div>
+
+
 
 function LiveStream(props) {
 
     const [liveStream,setLiveStream]=React.useState(false)
+    const [val,setVal]=React.useState(null)
     const refContainer = React.useRef(null)
-    console.log(refContainer)
+    const [options,setOptions]=React.useState({})
+    
+    React.useEffect(()=>{
+        let uid = Math.floor(1000 + Math.random() * 9000)
+        setVal(uid)
+        axios.get(`${process.env.REACT_APP_DEVELOPMENT}/access_token?channelName=test&role=${props.eventOrganizerId===props.user.userInfo._id?'publisher':'subscriber'}&uid=${uid}`)
+        .then(res=>{
+            console.log(res)
+            setOptions(
+                {
+                    // Pass your app ID here.
+                    appId: "f5808036f38f4f46897775f9567caac5",
+                    // Set the channel name.
+                    channel: "test",
+                    // Use a temp token
+                    token: res.data.token, 
+                    //"007eJxTYNhyZJ6xqeHFZE/9XZ19rD5rG7WjHmxinxznc3DL5k4XnyIFhjRTCwMLA2OzNGOLNJM0EzMLS3Nzc9M0S1Mz8+TExGTTZRzqyapRGslazywZGRkgEMTnZihJLS5JzkjMy0vNYWAAALYHIJA=",
+                    // Uid
+                    uid,
+                }
+            )
+        })
+
+    },[])
+    console.log(refContainer,options)
     async function startBasicLiveStreaming() {
         rtc.client = AgoraRTC.createClient({mode: "live", codec: "vp8"});
     
@@ -115,6 +130,8 @@ function LiveStream(props) {
     
             document.getElementById("leave").onclick = async function () {
                 setLiveStream(false)
+                window.location.reload(false);
+                //setVal(Math.floor(1000 + Math.random() * 9000))
                 // Close all the local tracks.
                 rtc.localAudioTrack.close();
                 rtc.localVideoTrack.close();
