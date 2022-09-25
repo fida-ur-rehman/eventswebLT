@@ -10,38 +10,37 @@ import axios from 'axios'
 
 function ChatDetailT(props) {
     const [message,setMessage]=React.useState("")
-    const [newMessages,setNewMessages]=React.useState([])
+    const [newMessages,setNewMessages]=React.useState(props.messages)
     const [open,setOpen]=React.useState(false)
     const [organizerInfo,setOrganizerInfo]=React.useState({})
-    console.log(props)
-    React.useEffect(()=>{
+    const myRef = React.useRef(null)
+    const executeScroll = () => myRef.current.scrollIntoView()  
 
+    console.log("props of chat detail",props)
 
-
-
-        
-      console.log("props of chat detail",props);
+    React.useEffect(()=>{    
     if(props.organizerId.length>0){
         axios.post(`${process.env.REACT_APP_DEVELOPMENT}/api/event/organiser-event`,{organiserId:props.organizerId},{headers:{token:props.EventUser.user}})
         .then(res=>{
-            console.log("organizerdi req",res)
             setOrganizerInfo(res.data.result)
         })
         .catch(err=>{
-            console.log(err)
         })
     }
 
-
+    if(props.name.length>0){
+        executeScroll()
+    }
         
         props.socket.on("receive_message", (msg) => {
-            console.log("messagesrecived",msg,props);
             //setNewMessages((prevMsg)=>[...prevMsg,msg]);
-            console.log("propsmessages is",props.messages);
+            console.log("--------------recevie message")
+            setNewMessages([...newMessages,msg])
             props.updateSocket(msg)
+            executeScroll()
 
           });
-    },[props.socket,props.organizerId])
+    },[])
     const handleSubmit = async ()=>{
         if (message !== "") {
 
@@ -54,11 +53,10 @@ function ChatDetailT(props) {
       
             await props.socket.emit("send_message", messageData);
             // setMessageList((list) => [...list, messageData]);
-            // console.log(messageList,"____________________")
             setMessage("");
           }
     }
-
+    console.log(newMessages)
     return (
         <div className="chat-detail">
             <UserInfoModal organizerInfo={organizerInfo} open={open} setOpen={setOpen} />
@@ -70,9 +68,9 @@ function ChatDetailT(props) {
             
             <div className="userchats">
         {
-            props.messages.length>0?(
-                props.messages.map((item,index)=>(
-                    <div className={index===0?"mt-5 mb-5":"mb-3"}  key={index}>
+            props.socketMessages.length>0?(
+                props.socketMessages.map((item,index)=>(
+                    <div  className={index===0?"mt-5 mb-5":"mb-3"}  key={index}>
                     <div className={item.sender===props.EventUser.userInfo._id?"mychat":"senderchat"}>
                     <p className="textcontainer">{item.text}</p>
                     </div>
@@ -81,6 +79,7 @@ function ChatDetailT(props) {
                 ))
             ):null
         }
+        <div ref={myRef} />
           {/* {
            newMessages.length>0?(
                newMessages.map((item,index)=>(
@@ -116,7 +115,7 @@ function ChatDetailT(props) {
 const mapStateToProps = ({socket,EventUser})=>{
     return {
         EventUser,
-        messages:socket.messages
+        socketMessages:socket.messages
     }
 }
 const mapDispatchToProps=(dispatch)=>{

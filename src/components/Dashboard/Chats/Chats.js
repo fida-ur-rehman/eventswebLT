@@ -35,7 +35,6 @@ function Chats(props) {
         
           axios.get(`${process.env.REACT_APP_DEVELOPMENT}/api/conv/user-con`, {headers: {token: props.EventUser.user}})
             .then(async response =>  {
-                console.log(response.data.result)
                 setChatList(response.data.result)
                         //take conversation id from prop and join room from that
 
@@ -47,11 +46,9 @@ function Chats(props) {
                         return userConversation
                     }
                 }))
-                console.log("roomconvo",roomConvo,indx)
                 //joinRoom(roomConvo[0],indx)
                 await socket.on("count",(conversationId)=>{
                     //setCount(conversationId)
-                    console.log("inside couujuuuuuuuuuuuuuuuuuuuuuunt");
                     let index = 0
                     let ar = localchatList.filter((item,indexC)=>{
                         if(item._id===conversationId){
@@ -60,20 +57,16 @@ function Chats(props) {
                         return item._id===conversationId
                         
                     })
-                    console.log("aris",ar);
                     if(ar.length>0){
                         let count = -ar[0].unseen
                         count = count+1
-                        console.log("countis",count,index);
                         localchatList[index].unseen=-count;
-                    console.log("localchatlist",localchatList);
                         let items = localchatList.filter(item=>item!==ar[0])
                         items.unshift(ar[0])
                         setChatList(items)
                         
                         setCount(!counts)
                     }else{
-                        console.log("chatlist is mpy");
                     }
         
                 })
@@ -84,7 +77,6 @@ function Chats(props) {
 
     
     const joinRoom = async (item,index)=>{
-        console.log("joininiiiiiiiing roooooooooooom",item)
         setActive(index)
         if(room!==""){
             await socket.emit("leave_room", room)
@@ -99,7 +91,6 @@ function Chats(props) {
             setCount(!counts)
             await socket.on("all-msg", async (data) => {
             //    await socket.emit("seen_msg", item.unseen, item._id);
-              //console.log(data)
               props.storeSocket(data)
               setMessages(data);
             });
@@ -124,6 +115,9 @@ function Chats(props) {
           return name[0].name
         }
     }
+
+    console.log("messages of chats component",messages)
+
     return (
         <div className="row chats">
         <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -143,7 +137,6 @@ function Chats(props) {
                     <div onClick={()=>joinRoom(item,index)} key={index} className={item.unseen===0?(active===index?"conversation-card-activeconversation":"conversation-card"):"conversation-card-active"}>
                     <div  className="row align-items-center justify-content-between">
                         {/* {
-                            console.log(active,index)
                         } */}
                         <div>
                         <h3>{renderName(item)}</h3>
